@@ -1,0 +1,122 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<header>
+    <head th:include="header-footer.html :: header_container"></head>
+    <div th:replace="header-footer.html :: navbar_container"></div>
+</header>
+
+<!-- Default form contact -->
+<form class="border p-3" th:action="@{/employee/add}" th:object="${employee}"
+      method="post" enctype="multipart/form-data">
+    <div class="card">
+        <div class="card-header">
+            <p class="h5">Add New Employee</p>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form2Example1">Name</label>
+                                <input type="text" id="form2Example1" class="form-control" name="name"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-4">
+                                <label class="form-label" for="inputTitle">Address</label>
+                                <input type="text" id="inputTitle" class="form-control" name="address"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-outline">
+                                <input type="text" id="inputGender" name="gender" class="form-control mb-4">
+                                <label for="inputGender" class="form-label">Gender</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-outline">
+                                <input type="text" id="inputPosition" name="position"
+                                       class="form-control mb-4">
+                                <label for="inputPosition" class="form-label">Position</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-outline">
+                                <input type="text" name="status" id="inputStatus" class="form-control mb-4">
+                                <label for="inputStatus" class="form-label">Status</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-outline">
+                                <input type="number" name="salary" id="inputSalary"
+                                       class="form-control mb-4" th:min="0">
+                                <label for="inputSalary" class="form-label">Salary</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-outline">
+                                <input type="text" name="age" id="inputAge" class="form-control mb-4" th:min="0" th:max="100">
+                                <label for="inputAge" class="form-label">Age</label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-outline">
+                                <input type="number" name="salary" id="inputYears"
+                                       class="form-control mb-4" th:min="0" th:max="100">
+                                <label for="inputYears" class="form-label">Time in Company(Years)</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="row">
+                        <div class="col-md-6">
+                            <div class="form-outline">
+                                <input type="text" id="inputAuthor" name="author" class="form-control mb-4">
+                                <label for="inputAuthor" class="form-label">Author</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-outline">
+                                <input type="number" name="stock" id="inputQuantity" class="form-control mb-4">
+                                <label for="inputQuantity" class="form-label">Quantity in Stock</label>
+                            </div>
+                        </div>
+                    </div>-->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="row">
+            <div class="col-1 text-center">
+                <!-- Send button -->
+                <a class="btn btn-light p-2"
+                   th:href="@{${baseUrl}+'/admin/book'}"><span class="material-icons">arrow_back_ios</span> Back</a>
+            </div>
+            <div class="col-2 text-left">
+                <!-- Send button -->
+                <button class="btn btn-info p-2" type="submit"><span class="material-icons">save</span> Save</button>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+</form>
+<!-- Default form contact -->
+
+<footer th:include="header-footer.html :: footer_container"></footer>

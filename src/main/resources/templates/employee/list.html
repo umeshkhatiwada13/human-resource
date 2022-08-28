@@ -1,0 +1,80 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<header>
+    <head th:include="header-footer.html :: header_container"></head>
+    <div th:replace="header-footer.html :: navbar_container"></div>
+    <style>
+        #tblBooks {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        #tblBooks td, #tblBooks th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #tblBooks tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #tblBooks tr:hover {
+            background-color: #ddd;
+        }
+
+        #tblBooks th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: center;
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</header>
+<body>
+<div class="card-body">
+    <div>
+        <!-- Add button -->
+        <a class="btn btn-info p-2 mr-2" th:href="@{${baseUrl}+'/employee/add'}"><span
+                class="material-icons">add</span> Add
+        </a>
+    </div>
+    <table id="tblBooks">
+        <thead>
+        <tr>
+            <th>S.N.</th>
+            <th>Name</th>
+            <th>Address</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Time in Company (Years)</th>
+            <th>Salary</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="emp,iter: ${employees}">
+            <div th:with="id=${emp.id}">
+                <td class="text-center">[[${iter.index}+1]].</td>
+                <td>[[${emp.name}]]</td>
+                <td>[[${emp.address}]]</td>
+                <td class="text-center">[[${emp.gender}]]</td>
+                <td class="text-center">[[${emp.age}]]</td>
+                <td class="text-center">[[${emp.years}]]</td>
+                <td class="text-center">[[${emp.salary}]]</td>
+                <td class="text-center"><a button type="button" class="btn btn-primary p-0"
+                                           th:href="@{${emp.id}+'/edit'}" title="Edit"><span
+                        class="material-icons">create</span></a> &nbsp
+                    <a button type="button" class="btn btn-danger p-0"
+                       th:href="@{${emp.id}+'/delete'}" title="Delete"><span
+                            class="material-icons">delete</span></a>
+                    </button>
+                </td>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<footer th:include="header-footer.html :: footer_container"></footer>
