@@ -22,23 +22,27 @@
                         <div class="col-md-6">
                             <div class="mb-4">
                                 <label class="form-label" for="form2Example1">Name</label>
-                                <input type="text" id="form2Example1" class="form-control" name="name" th:value="${employee?.name}"/>
+                                <input type="text" id="form2Example1" class="form-control" name="name"
+                                       th:value="${employee?.name}"/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-4">
                                 <label class="form-label" for="inputTitle">Address</label>
-                                <input type="text" id="inputTitle" class="form-control" name="address" th:value="${employee?.address}"/>
+                                <input type="text" id="inputTitle" class="form-control" name="address"
+                                       th:value="${employee?.address}"/>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div>
-                                <label for="inputGender" class="form-label">Gender</label>
-                                <input type="text" id="inputGender" name="gender" class="form-control mb-4" th:value="${employee?.gender}">
-                            </div>
+                        <div class="col-md-6 mt-4">
+                            <select class="form-select" aria-label="Default select example" name="gender">
+                                <option selected>Gender</option>
+                                <option th:value="Male" th:selected="${employee?.gender == 'Male'}">Male</option>
+                                <option th:value="Female" th:selected="${employee?.gender == 'Female'}">Female</option>
+                                <option th:value="Others" th:selected="${employee?.gender == 'Male'}">Male</option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <div>
@@ -50,11 +54,15 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div>
-                                <label for="inputStatus" class="form-label">Employment Status</label>
-                                <input type="text" name="employmentStatus" id="inputStatus" class="form-control mb-4" th:value="${employee?.employmentStatus}">
-                            </div>
+                        <div class="col-md-6 mt-4">
+                            <select class="form-select" aria-label="Default select example" name="employmentStatus">
+                                <option selected>Employment Status</option>
+                                <option th:value="Join" th:selected="${employee?.employmentStatus == 'Joined'}">Join
+                                </option>
+                                <option th:value="Termination"
+                                        th:selected="${employee?.employmentStatus == 'Termination'}">Termination
+                                </option>
+                            </select>
                         </div>
                         <div class="col-md-6">
                             <div>
@@ -82,22 +90,18 @@
                         </div>
                     </div>
 
-                    <!--<div class="row">
+                    <div class="row">
                         <div class="col-md-6">
-                            <div class="form-outline">
-                                <input type="text" id="inputAuthor" name="author" class="form-control mb-4">
-                                <label for="inputAuthor" class="form-label">Author</label>
-                            </div>
+                            <select class="form-select" aria-label="Default select example" name="user">
+                                <option selected disabled>Select User</option>
+                                <th:block th:each="user : ${users}">
+                                    <option th:value="${user.id}" th:selected="${user.id == employee?.user?.id}">
+                                        [[${user.username}]]
+                                    </option>
+                                </th:block>
+                            </select>
                         </div>
-
-                        <div class="col-md-6">
-                            <div class="form-outline">
-                                <input type="number" name="stock" id="inputQuantity" class="form-control mb-4">
-                                <label for="inputQuantity" class="form-label">Quantity in Stock</label>
-                            </div>
-                        </div>
-                    </div>-->
-
+                    </div>
                 </div>
             </div>
         </div>
@@ -111,7 +115,9 @@
             </div>
             <div class="col-2 text-left">
                 <!-- Send button -->
-                <button class="btn btn-info p-2" type="submit"><span class="material-icons">save</span> [[${buttonTitle}]]</button>
+                <button class="btn btn-info p-2" type="submit"><span class="material-icons">save</span>
+                    [[${buttonTitle}]]
+                </button>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@ package com.humanresource.repo;
 
 import com.humanresource.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,13 @@ public interface EmployeeRepo extends JpaRepository<Employee, Integer> {
             nativeQuery = true)
     List<Employee> findAllActive();
 
-    @Query(value = "UPDATE employee SET is_active= FALSE WHERE id = ?1",
+    @Modifying
+    @Query(value = "UPDATE employee SET is_active= FALSE WHERE id = ?1 ",
             nativeQuery = true)
     void updateDeletedStatusById(Integer id);
+
+    @Query(value = "SELECT email from user u " +
+            "join employee e on e.user_id = u.id " +
+            "where e.role = 'HR' limit 1", nativeQuery = true)
+    String getHrEmail();
 }

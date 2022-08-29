@@ -1,8 +1,11 @@
 package com.humanresource.service.impl;
 
 import com.humanresource.model.Employee;
+import com.humanresource.repo.EmployeeRepo;
 import com.humanresource.service.EmailService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -15,35 +18,44 @@ import java.util.Properties;
  * @created 29/08/2022 - 06:25
  */
 @Service
+@RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
+
+    private final EmployeeRepo employeeRepo;
+
     @Override
     public void sendMail(Employee employee) {
-        // Recipient's email ID needs to be mentioned.
-        String to = "testdata9898@yopmail.com";
+        String hrEmail = employeeRepo.getHrEmail();
+        // Recipient's email
+        String to = StringUtils.isEmpty(hrEmail) ? "testdata9898@yopmail.com" : hrEmail;
 
         // Sender's email ID needs to be mentioned
         String from = "umeshkhatiwada12@gmail.com";
 
-        // Assuming you are sending email from localhost
-        String host = "smtp.mailtrap.io";
-
         // Get system properties
         Properties props = System.getProperties();
 
-        // Setup mail server
-        props.setProperty("mail.smtp.host", host);
+        /*
+         String host = "smtp.mailtrap.io";
+         props.setProperty("mail.smtp.host", host);
         props.put("mail.smtp.port", 2525);
         props.put("mail.smtp.auth", "true");
         props.put("mail.smtp.timeout", "20000");
         props.put("mail.smtp.connectiontimeout", "20000");
         props.put("mail.smtp.ssl.enable", "false");
         props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.debug", "true");
+        props.put("mail.smtp.debug", "true");*/
+
+        // Setup mail server
+        props.put("mail.smtp.host", "smtp.gmail.com");
+        props.put("mail.smtp.port", "465");
+        props.put("mail.smtp.ssl.enable", "true");
+        props.put("mail.smtp.auth", "true");
 
         // Get the default Session object.
         Session session = Session.getInstance(props, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("9a96de1247cc99", "d7ebc94c4dae6c");
+                return new PasswordAuthentication("umeshkhatiwada12@gmail.com", "snefimiovrluokov");
             }
         });
 
@@ -64,7 +76,7 @@ public class EmailServiceImpl implements EmailService {
                     .append("Employee : ").append(employee.getName())
                     .append(" has joined our company for ")
                     .append(employee.getPosition())
-                    .append("position with salary of ")
+                    .append(" position with salary of ")
                     .append(employee.getSalary()).toString();
 
             // Send the actual HTML message, as big as you like

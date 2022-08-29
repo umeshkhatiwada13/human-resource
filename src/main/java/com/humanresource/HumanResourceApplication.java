@@ -30,6 +30,7 @@ public class HumanResourceApplication implements CommandLineRunner {
         User user = User.builder()
                 .id(1)
                 .username("admin")
+                .email("admin@gmail.com")
                 .password(passwordEncoder.encode("Test@123"))
                 .role("ADMIN")
                 .build();

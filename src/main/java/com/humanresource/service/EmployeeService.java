@@ -18,4 +18,6 @@ public interface EmployeeService {
     boolean delete(Integer id);
 
     List<Employee> findAll();
+
+    String getHrEmail();
 }

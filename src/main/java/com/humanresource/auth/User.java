@@ -19,6 +19,9 @@ import javax.persistence.Id;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
+    public User(Integer id) {
+        this.id = id;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +32,6 @@ public class User {
     private String password;
 
     private String role;
+
+    private String email;
 }

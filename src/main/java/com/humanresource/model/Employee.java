@@ -1,5 +1,6 @@
 package com.humanresource.model;
 
+import com.humanresource.auth.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -52,9 +53,9 @@ public class Employee {
 
     private float salary;
 
-    /*@OneToOne
+    @OneToOne
     @JoinColumn(name = "user_id")
-    private ApplicationUser user;*/
+    private User user;
 
     @Column(name = "is_active")
     boolean isActive = true;

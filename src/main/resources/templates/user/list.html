@@ -38,7 +38,7 @@
                                             th:text="${message}"></div></span>
     <div class="mb-2">
         <!-- Add button -->
-        <a class="btn btn-info p-2 mr-2" th:href="@{${baseUrl}+'/employee/add'}"><span
+        <a class="btn btn-info p-2 mr-2" th:href="@{${baseUrl}+'/user/add'}"><span
                 class="material-icons">add</span> Add
         </a>
     </div>
@@ -46,33 +46,18 @@
         <thead>
         <tr>
             <th>S.N.</th>
-            <th>Name</th>
-            <th>Address</th>
-            <th>Gender</th>
-            <th>Age</th>
-            <th>Time in Company (Years)</th>
-            <th>Salary</th>
-            <th>Actions</th>
+            <th>Username</th>
+            <th>Role</th>
+            <th>Email</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="emp,iter: ${employees}">
-            <div th:with="id=${emp.id}">
+        <tr th:each="user,iter: ${users}">
+            <div th:with="id=${user.id}">
                 <td class="text-center">[[${iter.index}+1]].</td>
-                <td>[[${emp.name}]]</td>
-                <td>[[${emp.address}]]</td>
-                <td class="text-center">[[${emp.gender}]]</td>
-                <td class="text-center">[[${emp.age}]]</td>
-                <td class="text-center">[[${emp.years}]]</td>
-                <td class="text-center">[[${emp.salary}]]</td>
-                <td class="text-center">
-                    <a button type="button" class="btn btn-primary p-0"
-                                           th:href="@{'edit/'+${emp.id}}" title="Edit"><span
-                        class="material-icons">create</span></a>
-                    <a button type="button" class="btn btn-danger p-0"
-                       th:href="@{'delete/'+${emp.id}}" title="Delete"><span
-                            class="material-icons">delete</span></a>
-                </td>
+                <td>[[${user.username}]]</td>
+                <td>[[${user.role}]]</td>
+                <td>[[${user.email}]]</td>
             </div>
         </tr>
         </tbody>
