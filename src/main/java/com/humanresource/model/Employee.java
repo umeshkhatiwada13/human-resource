@@ -48,7 +48,7 @@ public class Employee {
     private String position;
 
     @Column(name = "employment_status")
-    private String emplymentStatus;
+    private String employmentStatus;
 
     private float salary;
 

@@ -34,7 +34,9 @@
 </header>
 <body>
 <div class="card-body">
-    <div>
+    <span th:if="${type == 'success'}"><div class="alert alert-info" role="alert" th:if="${message}"
+                                            th:text="${message}"></div></span>
+    <div class="mb-2">
         <!-- Add button -->
         <a class="btn btn-info p-2 mr-2" th:href="@{${baseUrl}+'/employee/add'}"><span
                 class="material-icons">add</span> Add
@@ -63,13 +65,15 @@
                 <td class="text-center">[[${emp.age}]]</td>
                 <td class="text-center">[[${emp.years}]]</td>
                 <td class="text-center">[[${emp.salary}]]</td>
-                <td class="text-center"><a button type="button" class="btn btn-primary p-0"
-                                           th:href="@{${emp.id}+'/edit'}" title="Edit"><span
+                <td class="text-center">
+                    <a button type="button" class="btn btn-primary p-0"
+                                           th:href="@{'edit/'+${emp.id}}" title="Edit"><span
                         class="material-icons">create</span></a> &nbsp
+                    <form th:object="${emp.id}" th:action="@{delete}" th:method="delete">
                     <a button type="button" class="btn btn-danger p-0"
-                       th:href="@{${emp.id}+'/delete'}" title="Delete"><span
-                            class="material-icons">delete</span></a>
+                        title="Delete"><span class="material-icons">delete</span></a>
                     </button>
+                    </form>
                 </td>
             </div>
         </tr>

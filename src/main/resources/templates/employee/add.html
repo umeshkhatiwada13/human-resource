@@ -10,72 +10,74 @@
       method="post" enctype="multipart/form-data">
     <div class="card">
         <div class="card-header">
-            <p class="h5">Add New Employee</p>
+            <p class="h5">[[${title}]]</p>
         </div>
         <div class="card-body">
 
             <div class="row">
                 <div class="col-md-12">
                     <div class="row">
+                        <input th:type="hidden" name="id" th:value="${employee?.id}">
 
                         <div class="col-md-6">
-                            <div class="form-outline mb-4">
+                            <div class="mb-4">
                                 <label class="form-label" for="form2Example1">Name</label>
-                                <input type="text" id="form2Example1" class="form-control" name="name"/>
+                                <input type="text" id="form2Example1" class="form-control" name="name" th:value="${employee?.name}"/>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-4">
                                 <label class="form-label" for="inputTitle">Address</label>
-                                <input type="text" id="inputTitle" class="form-control" name="address"/>
+                                <input type="text" id="inputTitle" class="form-control" name="address" th:value="${employee?.address}"/>
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-outline">
-                                <input type="text" id="inputGender" name="gender" class="form-control mb-4">
+                            <div>
                                 <label for="inputGender" class="form-label">Gender</label>
+                                <input type="text" id="inputGender" name="gender" class="form-control mb-4" th:value="${employee?.gender}">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-outline">
-                                <input type="text" id="inputPosition" name="position"
-                                       class="form-control mb-4">
+                            <div>
                                 <label for="inputPosition" class="form-label">Position</label>
+                                <input type="text" id="inputPosition" name="position" th:value="${employee?.position}"
+                                       class="form-control mb-4">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-outline">
-                                <input type="text" name="status" id="inputStatus" class="form-control mb-4">
-                                <label for="inputStatus" class="form-label">Status</label>
+                            <div>
+                                <label for="inputStatus" class="form-label">Employment Status</label>
+                                <input type="text" name="employmentStatus" id="inputStatus" class="form-control mb-4" th:value="${employee?.employmentStatus}">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-outline">
-                                <input type="number" name="salary" id="inputSalary"
-                                       class="form-control mb-4" th:min="0">
+                            <div>
                                 <label for="inputSalary" class="form-label">Salary</label>
+                                <input type="number" name="salary" id="inputSalary" th:value="${employee?.salary}"
+                                       class="form-control mb-4" th:min="0">
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="form-outline">
-                                <input type="text" name="age" id="inputAge" class="form-control mb-4" th:min="0" th:max="100">
+                            <div>
                                 <label for="inputAge" class="form-label">Age</label>
+                                <input type="text" name="age" id="inputAge" th:value="${employee?.age}"
+                                       class="form-control mb-4" th:min="0" th:max="100">
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="form-outline">
-                                <input type="number" name="salary" id="inputYears"
-                                       class="form-control mb-4" th:min="0" th:max="100">
+                            <div>
                                 <label for="inputYears" class="form-label">Time in Company(Years)</label>
+                                <input type="number" name="years" id="inputYears" th:value="${employee?.years}"
+                                       class="form-control mb-4" th:min="0" th:max="100">
                             </div>
                         </div>
                     </div>
@@ -105,11 +107,11 @@
             <div class="col-1 text-center">
                 <!-- Send button -->
                 <a class="btn btn-light p-2"
-                   th:href="@{${baseUrl}+'/admin/book'}"><span class="material-icons">arrow_back_ios</span> Back</a>
+                   th:href="@{${baseUrl}+'/employee/list'}"><span class="material-icons">arrow_back_ios</span> Back</a>
             </div>
             <div class="col-2 text-left">
                 <!-- Send button -->
-                <button class="btn btn-info p-2" type="submit"><span class="material-icons">save</span> Save</button>
+                <button class="btn btn-info p-2" type="submit"><span class="material-icons">save</span> [[${buttonTitle}]]</button>
             </div>
         </div>
     </div>

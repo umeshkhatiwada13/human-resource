@@ -27,12 +27,29 @@ public class EmployeeManagementController {
     public String getAddPage(Model model) {
         model.addAttribute("baseUrl", StringUtils.baseUrl);
         model.addAttribute("title", "Add User");
+        model.addAttribute("buttonTitle", "Add");
         return "employee/add";
     }
 
     @PostMapping("add")
-    public String saveUser(@ModelAttribute Employee employee) {
+    public String saveUser(@ModelAttribute Employee employee, Model model) {
         employeeService.save(employee);
+        model.addAttribute(employee.getId() != null ? "User edited Successfully" : "User added Successfully");
+        return "redirect:/employee/list";
+    }
+
+    @GetMapping("edit/{id}")
+    public String getAddPage(@PathVariable Integer id, Model model) throws Exception {
+        model.addAttribute("baseUrl", StringUtils.baseUrl);
+        model.addAttribute("title", "Edit User");
+        model.addAttribute("buttonTitle", "Edit");
+        model.addAttribute("employee", employeeService.findById(id));
+        return "employee/add";
+    }
+
+    @DeleteMapping("delete/{id}")
+    public String saveUser(@PathVariable Integer id, Model model) {
+        employeeService.delete(id);
         return "redirect:/employee/list";
     }
 }
