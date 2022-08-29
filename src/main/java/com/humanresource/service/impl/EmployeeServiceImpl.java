@@ -2,9 +2,11 @@ package com.humanresource.service.impl;
 
 import com.humanresource.model.Employee;
 import com.humanresource.repo.EmployeeRepo;
+import com.humanresource.service.EmailService;
 import com.humanresource.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +21,7 @@ import java.util.Optional;
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepo employeeRepo;
+    private final EmailService emailService;
 
     @Override
     public Employee findById(Integer id) throws Exception {
@@ -33,6 +36,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void save(Employee employee) {
         try {
             employeeRepo.save(employee);
+            emailService.sendMail(employee);
         } catch (Exception e) {
             e.printStackTrace();
         }
