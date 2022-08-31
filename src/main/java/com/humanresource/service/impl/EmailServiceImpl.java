@@ -24,10 +24,9 @@ public class EmailServiceImpl implements EmailService {
     private final EmployeeRepo employeeRepo;
 
     @Override
-    public void sendMail(Employee employee) {
-        String hrEmail = employeeRepo.getHrEmail();
+    public void sendMail(Employee employee, boolean isTerminationMail) {
         // Recipient's email
-        String to = StringUtils.isEmpty(hrEmail) ? "testdata9898@yopmail.com" : hrEmail;
+        String to = employeeRepo.getHrEmail() != null ? employeeRepo.getHrEmail() : "umeshkhatiwada13@gmail.com";
 
         // Sender's email ID needs to be mentioned
         String from = "umeshkhatiwada12@gmail.com";
@@ -74,9 +73,11 @@ public class EmailServiceImpl implements EmailService {
 
             String customMessage = new StringBuilder("<h1>This is actual message</h1>")
                     .append("Employee : ").append(employee.getName())
-                    .append(" has joined our company for ")
+                    .append(" has ")
+                    .append(isTerminationMail ? "has requested termination from" : "joined")
+                    .append(" our company with ")
                     .append(employee.getPosition())
-                    .append(" position with salary of ")
+                    .append(" position and salary of ")
                     .append(employee.getSalary()).toString();
 
             // Send the actual HTML message, as big as you like

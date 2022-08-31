@@ -1,8 +1,25 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <header>
     <head th:include="header-footer.html :: header_container"></head>
     <div th:replace="header-footer.html :: navbar_container"></div>
 </header>
+
+<h3>Welcome to the Home page</h3>
+<div sec:authorize="hasAnyAuthority('EMPLOYEE', 'HR')">
+    Your details
+    Name : [[${employee?.name}]] <br>
+    Address : [[${employee?.address}]] <br>
+    Gender : [[${employee?.gender}]] <br>
+    Position : [[${employee?.position}]] <br>
+    Salary : [[${employee?.salary}]] <br>
+    Username : [[${user.username}]]
+</div>
+<hr>
+<div sec:authorize="hasAuthority('EMPLOYEE')">
+    <a th:href="@{${baseUrl}+'/email/resignation/'+${employee.id}}"
+       class="btn btn-outline-success" type="submit">Send Resignation Mail Admin</a>
+</div>
 
 <footer th:include="header-footer.html :: footer_container"></footer>

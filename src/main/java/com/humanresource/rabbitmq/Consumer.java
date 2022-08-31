@@ -19,6 +19,6 @@ public class Consumer {
 
     @RabbitListener(queues = ROUTING_KEY)
     public void receiveMessage(Employee employee) throws Exception {
-        emailService.sendMail(employee);
+        emailService.sendMail(employee, false);
     }
 }

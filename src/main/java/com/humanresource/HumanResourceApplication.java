@@ -26,7 +26,7 @@ public class HumanResourceApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         User user = User.builder()
                 .id(1)
                 .username("admin")

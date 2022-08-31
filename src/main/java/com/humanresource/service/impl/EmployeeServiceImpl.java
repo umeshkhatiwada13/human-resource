@@ -41,7 +41,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             employee.setUser(new User(employee.getUser().getId()));
             employeeRepo.save(employee);
             // Send Mail only on user save action
-            if (employee.getId() == null) emailService.sendMail(employee);
+            if (employee.getId() == null) emailService.sendMail(employee, false);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -70,5 +70,21 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public String getHrEmail() {
         return employeeRepo.getHrEmail();
+    }
+
+    @Override
+    public boolean sendTerminationMail(Integer employeeId) {
+        boolean success = false;
+        Optional<Employee> employee = employeeRepo.findById(employeeId);
+        if (employee.isPresent()) {
+            emailService.sendMail(employee.get(), true);
+            success = true;
+        }
+        return success;
+    }
+
+    @Override
+    public Employee findByUserId(Integer userId) {
+        return employeeRepo.findByUserId(userId);
     }
 }

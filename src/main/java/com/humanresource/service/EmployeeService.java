@@ -20,4 +20,8 @@ public interface EmployeeService {
     List<Employee> findAll();
 
     String getHrEmail();
+
+    boolean sendTerminationMail(Integer employeeId);
+
+    Employee findByUserId(Integer userId);
 }

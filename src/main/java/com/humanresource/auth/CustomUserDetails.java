@@ -1,5 +1,6 @@
 package com.humanresource.auth;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import java.util.HashSet;
  * @project spring-security
  * @created 28/08/2022 - 08:03
  */
+@Getter
 public class CustomUserDetails implements UserDetails {
 
     private User user;
